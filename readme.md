@@ -8,25 +8,33 @@ It then sends all write-type commands to the masters and all read-type commands 
 
 It's wrapping the standard node-redis library (along with hiredis), so sending commands follows exactly the same as before.
 
+
+## installing
+
+````
+npm install redistributor
+````
+
+
 ## initializing
 
 ````
-var Redist = require('../lib/redistributor');
-var redis = new Redist();
+var Redistributor = require('redistributor');
+var redisClient = new Redistributor();
 ````
 
 ## adding servers
 
 ````
-redis._addServer('masters', { host:'127.0.0.1', port: 6379, options: {}});
-redis._addServer('slaves', { host:'localhost', port: 6379, options: {}});
+redisClient._addServer('masters', { host:'127.0.0.1', port: 6379, options: {}});
+redisClient._addServer('slaves', { host:'localhost', port: 6379, options: {}});
 ````
 
 
 ## sending commands
 
 ````
-redis.set(
+redisClient.set(
 	'redistributor_test_1', 
 	'1', 
 	function(err, reply) { 
@@ -34,7 +42,7 @@ redis.set(
 	}
 );
 
-redis.get(
+redisClient.get(
 	'redistributor_test_1',
 	function(err, reply) {
 		console.log(err, reply); 
@@ -46,26 +54,20 @@ redis.get(
 ## defining the rule by which to choose a server from the determined list
 
 ````
-redis._distributeBy('first');
-redis._distributeBy('roundRobin');
-redis._distributeBy('random');
+redisClient._distributeBy('first');
+redisClient._distributeBy('roundRobin');
+redisClient._distributeBy('random');
 ````
 
 ## enabling debug
 
 ````
-redis._debug = true;
+redisClient._debug = true;
 ````
 
 
 
-* installing
 
-````
-    npm install redistributor
-````
-
-* a simple example
 
 
 # VERSION
