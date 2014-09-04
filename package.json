@@ -1,0 +1,32 @@
+{
+  "name": "redistributor",
+  "description": "redistributor is a nodeJS library that distributes redis commands to instances by command (e.g. reads vs. writes)",
+  "version": "0.1.0",
+  "author": "Toni Wagner <i@itsatony.com>",
+  "engines": {
+    "node": ">= 0.10.0"
+	},
+  "main": "lib/redistributor.js",
+	"repository": {
+    "type": "git",
+    "url": "https://github.com/itsatony/redistributor"
+  },
+  "keywords": [
+    "nodejs",
+		"javascript",
+    "redis",
+    "master",
+    "slave",
+    "io"
+  ],
+  "license": "MIT",
+  "dependencies": {		
+		"redis": "0.12.1",
+		"hiredis": "latest"
+  },
+  "devDependencies": {
+		"mocha": "1.14.0",
+		"should": "2.1.0"
+  }
+}
+
