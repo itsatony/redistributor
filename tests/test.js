@@ -3,6 +3,7 @@ var Redist = require('../lib/redistributor');
 var should = require('should');
 
 var redis = new Redist();
+redis._debug = true;
 
 describe(
 	'Adding masters server',
@@ -58,7 +59,7 @@ describe(
 	'send a get',
 	function() {
 		it(
-			'should choose a master and write into redis', 
+			'should choose a slave and read from redis', 
 			function(done) {
 				var answer = redis.get(
 					'redistributor_test_1',
@@ -72,6 +73,28 @@ describe(
 		);
 	}
 );
+
+
+describe(
+	'send a del',
+	function() {
+		it(
+			'should choose a master and delete from redis', 
+			function(done) {
+				var answer = redis.del(
+					'redistributor_test_1',
+					function(err, reply) {
+						should.equal(err, null);
+						reply.should.equal(1);
+						done();
+					}
+				);
+			}
+		);
+	}
+);
+
+
 
 
 
